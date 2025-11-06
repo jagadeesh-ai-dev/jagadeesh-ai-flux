@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
@@ -27,33 +27,36 @@ const Hero = () => {
           <div className="space-y-4">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold">
               <span className="gradient-text text-shadow-glow animate-glow">
-                AI x .NET Developer
+                Vutukuru Jagadeesh Kumar Reddy
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-foreground/90">
-              Vutukuru Jagadeesh Kumar Reddy
+              AI × .NET Developer | Full Stack Engineer | Problem Solver
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Full-Stack Engineer crafting intelligent digital solutions with cutting-edge technology
+              Building Smart, Scalable, and AI-Driven Solutions.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
             <Button 
               size="lg" 
-              className="group relative overflow-hidden bg-gradient-primary hover:shadow-neon transition-all duration-300"
+              className="group relative overflow-hidden bg-gradient-primary hover:shadow-neon transition-all duration-300 text-lg px-8"
               onClick={() => scrollToSection('projects')}
             >
-              View Projects
+              🧠 View My Work
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button 
               size="lg" 
               variant="outline"
-              className="glass hover:bg-primary/10 border-primary/30 hover:border-primary transition-all duration-300"
-              onClick={() => scrollToSection('contact')}
+              className="glass hover:bg-primary/10 border-primary/30 hover:border-primary transition-all duration-300 text-lg px-8"
+              asChild
             >
-              Get in Touch
+              <a href="/resume.pdf" download>
+                <Download className="mr-2 h-5 w-5" />
+                📄 Download Resume
+              </a>
             </Button>
           </div>
 

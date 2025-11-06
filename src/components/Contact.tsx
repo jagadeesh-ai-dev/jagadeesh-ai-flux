@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Send } from "lucide-react";
+import { Mail, Send, MessageCircle, Linkedin, Github } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
@@ -14,8 +14,6 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // For now, just show a success message
-    // Email integration can be added later with Lovable Cloud
     toast({
       title: "Message Sent!",
       description: "Thanks for reaching out. I'll get back to you soon.",
@@ -42,7 +40,7 @@ const Contact = () => {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="glass rounded-2xl p-8 shadow-card space-y-6">
+          <form onSubmit={handleSubmit} className="glass rounded-2xl p-8 shadow-card space-y-6 mb-8">
             <div>
               <label htmlFor="name" className="block text-sm font-medium mb-2">
                 Name
@@ -97,6 +95,58 @@ const Contact = () => {
               Send Message
             </Button>
           </form>
+
+          {/* Direct Contact Options */}
+          <div className="glass rounded-2xl p-8 shadow-card">
+            <h3 className="text-xl font-bold text-center mb-6 gradient-text">
+              Or reach me directly via:
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
+              <Button 
+                variant="outline"
+                className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
+                asChild
+              >
+                <a href="mailto:vjagadeeshkumarreddy@gmail.com" target="_blank" rel="noopener noreferrer">
+                  <Mail className="mr-2 h-5 w-5" />
+                  📧 Email
+                </a>
+              </Button>
+              
+              <Button 
+                variant="outline"
+                className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
+                asChild
+              >
+                <a href="https://wa.me/919391163614" target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="mr-2 h-5 w-5" />
+                  💬 WhatsApp
+                </a>
+              </Button>
+              
+              <Button 
+                variant="outline"
+                className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
+                asChild
+              >
+                <a href="https://www.linkedin.com/in/jagadeesh-kumar-reddy" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="mr-2 h-5 w-5" />
+                  💼 LinkedIn
+                </a>
+              </Button>
+              
+              <Button 
+                variant="outline"
+                className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
+                asChild
+              >
+                <a href="https://github.com/jagadeesh-ai-dev" target="_blank" rel="noopener noreferrer">
+                  <Github className="mr-2 h-5 w-5" />
+                  🧑‍💻 GitHub
+                </a>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

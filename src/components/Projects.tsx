@@ -1,96 +1,110 @@
-import { ExternalLink, Github } from "lucide-react";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
-const projects = [
-  {
-    title: "AI Portfolio",
-    description: "An intelligent portfolio system powered by machine learning algorithms for dynamic content curation and personalized user experiences.",
-    tech: ["AI", "React", ".NET", "SQL"],
-    gradient: "from-primary to-secondary"
-  },
-  {
-    title: "Affiliate Store",
-    description: "Full-featured e-commerce platform with advanced analytics, inventory management, and seamless payment integration.",
-    tech: ["React", ".NET Core", "SQL Server", "Stripe"],
-    gradient: "from-secondary to-accent"
-  },
-  {
-    title: "Interior Design App",
-    description: "Interactive 3D visualization tool for interior design planning with AI-powered furniture recommendations and AR preview.",
-    tech: ["Three.js", "AI", "React", "PostgreSQL"],
-    gradient: "from-accent to-primary"
-  },
-  {
-    title: "AI Tools Directory",
-    description: "Comprehensive directory of AI tools and resources with intelligent search, categorization, and user reviews.",
-    tech: ["React", ".NET", "MongoDB", "OpenAI API"],
-    gradient: "from-primary to-accent"
-  }
-];
+import { FolderOpen, ExternalLink } from "lucide-react";
+import { useState } from "react";
+import ProjectModal from "./ProjectModal";
 
 const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState<{
+    title: string;
+    demoUrl: string;
+  } | null>(null);
+
+  const projects = [
+    {
+      title: "GadgetVerse",
+      subtitle: "Affiliate Product Marketplace",
+      description: "Developed a responsive affiliate marketplace with product filters, ratings, and dynamic deals using React + Tailwind.",
+      tech: ["React", "Tailwind", "JavaScript"],
+      demoUrl: "https://gadgetverse.vercel.app",
+      gradient: "from-primary/20 to-secondary/20"
+    },
+    {
+      title: "GenPrompt AI",
+      subtitle: "AI Prompt Generator",
+      description: "Created an AI-powered prompt builder helping users generate viral and productive ChatGPT prompts with one click.",
+      tech: ["React", "OpenAI API"],
+      demoUrl: "https://genprompt-ai.vercel.app",
+      gradient: "from-secondary/20 to-accent/20"
+    },
+    {
+      title: "Brainy AI Hub",
+      subtitle: "AI Tools Directory",
+      description: "Designed a curated hub of AI tools across categories with instant filters, search, and user-friendly layout.",
+      tech: ["React", "Tailwind"],
+      demoUrl: "https://brainy-ai-hub.vercel.app",
+      gradient: "from-accent/20 to-primary/20"
+    }
+  ];
+
   return (
     <section id="projects" className="py-24 relative">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
-            <span className="gradient-text">Featured Projects</span>
-          </h2>
-          <div className="h-1 w-24 bg-gradient-primary mx-auto mb-16 rounded-full"></div>
+          <div className="text-center mb-16">
+            <div className="inline-flex p-3 rounded-full bg-gradient-primary mb-4 animate-glow">
+              <FolderOpen className="h-8 w-8 text-background" />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              <span className="gradient-text">Featured Projects</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Real-world applications built with modern technologies
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <div
-                key={index}
-                className="glass rounded-2xl p-8 hover:shadow-neon transition-all duration-300 group hover:scale-[1.02]"
+              <Card 
+                key={index} 
+                className="glass border-primary/30 overflow-hidden group hover:shadow-neon transition-all duration-300"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {/* Project Header */}
-                <div className={`h-2 w-full bg-gradient-to-r ${project.gradient} rounded-full mb-6`}></div>
-                
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
-                
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  {project.description}
-                </p>
-
-                {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((tech) => (
-                    <span 
-                      key={tech}
-                      className="px-3 py-1 text-sm font-mono bg-primary/10 border border-primary/30 rounded-full text-primary"
+                <div className={`h-2 bg-gradient-to-r ${project.gradient}`} />
+                <div className="p-6 space-y-4">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-1 gradient-text">{project.title}</h3>
+                    <p className="text-sm text-muted-foreground">{project.subtitle}</p>
+                  </div>
+                  
+                  <p className="text-muted-foreground leading-relaxed">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech, i) => (
+                      <span 
+                        key={i}
+                        className="px-3 py-1 text-xs rounded-full glass border border-primary/30"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="flex gap-3 pt-2">
+                    <Button 
+                      onClick={() => setSelectedProject({ title: project.title, demoUrl: project.demoUrl })}
+                      className="flex-1 bg-gradient-primary hover:shadow-neon transition-all duration-300"
                     >
-                      {tech}
-                    </span>
-                  ))}
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      Live Demo
+                    </Button>
+                  </div>
                 </div>
-
-                {/* Action Buttons */}
-                <div className="flex gap-3">
-                  <Button 
-                    size="sm" 
-                    variant="outline"
-                    className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300"
-                  >
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Demo
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline"
-                    className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300"
-                  >
-                    <Github className="h-4 w-4 mr-2" />
-                    Code
-                  </Button>
-                </div>
-              </div>
+              </Card>
             ))}
           </div>
         </div>
       </div>
+
+      {selectedProject && (
+        <ProjectModal
+          isOpen={!!selectedProject}
+          onClose={() => setSelectedProject(null)}
+          project={selectedProject}
+        />
+      )}
     </section>
   );
 };

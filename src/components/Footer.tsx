@@ -4,6 +4,10 @@ import { Button } from "@/components/ui/button";
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <footer className="relative py-12 border-t border-primary/20">
       <div className="container mx-auto px-4">
@@ -15,7 +19,7 @@ const Footer = () => {
                 Vutukuru Jagadeesh Kumar Reddy
               </h3>
               <p className="text-sm text-muted-foreground">
-                Full-Stack Developer | AI Enthusiast
+                AI × .NET Developer | Full Stack Engineer
               </p>
             </div>
 
@@ -27,7 +31,7 @@ const Footer = () => {
                 className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
                 asChild
               >
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/jagadeesh-kumar-reddy" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="h-5 w-5" />
                 </a>
               </Button>
@@ -37,7 +41,7 @@ const Footer = () => {
                 className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
                 asChild
               >
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/jagadeesh-ai-dev" target="_blank" rel="noopener noreferrer">
                   <Github className="h-5 w-5" />
                 </a>
               </Button>
@@ -54,10 +58,41 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* Quick Links */}
+          <div className="mt-8 flex justify-center gap-6 text-sm text-muted-foreground">
+            <button 
+              onClick={() => scrollToSection("hero")}
+              className="hover:text-primary transition-colors"
+            >
+              Home
+            </button>
+            <span>•</span>
+            <button 
+              onClick={() => scrollToSection("about")}
+              className="hover:text-primary transition-colors"
+            >
+              About
+            </button>
+            <span>•</span>
+            <button 
+              onClick={() => scrollToSection("projects")}
+              className="hover:text-primary transition-colors"
+            >
+              Projects
+            </button>
+            <span>•</span>
+            <button 
+              onClick={() => scrollToSection("contact")}
+              className="hover:text-primary transition-colors"
+            >
+              Contact
+            </button>
+          </div>
+
           {/* Copyright */}
           <div className="mt-8 pt-8 border-t border-primary/10 text-center">
-            <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
-              © {currentYear} Built with <Heart className="h-4 w-4 text-primary animate-pulse" /> using React & TypeScript
+            <p className="text-sm text-muted-foreground flex flex-wrap items-center justify-center gap-2">
+              © {currentYear} Jagadeesh AI Portfolio | Built with <Heart className="h-4 w-4 text-primary animate-pulse" /> using React & Lovable.dev | Hosted on Vercel
             </p>
           </div>
         </div>
