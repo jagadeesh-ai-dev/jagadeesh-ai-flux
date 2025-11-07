@@ -1,4 +1,4 @@
-import { Github, Linkedin, Instagram, Heart } from "lucide-react";
+import { Github, Linkedin, Mail, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Footer = () => {
@@ -51,8 +51,8 @@ const Footer = () => {
                 className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
                 asChild
               >
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                  <Instagram className="h-5 w-5" />
+                <a href="mailto:vjagadeeshkumarreddy@gmail.com" target="_blank" rel="noopener noreferrer">
+                  <Mail className="h-5 w-5" />
                 </a>
               </Button>
             </div>
@@ -61,7 +61,7 @@ const Footer = () => {
           {/* Quick Links */}
           <div className="mt-8 flex justify-center gap-6 text-sm text-muted-foreground">
             <button 
-              onClick={() => scrollToSection("hero")}
+              onClick={() => scrollToSection("home")}
               className="hover:text-primary transition-colors"
             >
               Home

@@ -1,7 +1,9 @@
 import { Code2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const Skills = () => {
+  const { ref, isVisible } = useIntersectionObserver();
   const skills = [
     { 
       name: ".NET", 
@@ -66,7 +68,13 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-24 relative">
+    <section 
+      id="skills" 
+      ref={ref as React.RefObject<HTMLElement>}
+      className={`py-24 relative transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">

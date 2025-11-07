@@ -2,30 +2,58 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Send, MessageCircle, Linkedin, Github } from "lucide-react";
+import { Mail, Send, Phone, Linkedin, Github } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const { ref, isVisible } = useIntersectionObserver();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    toast({
-      title: "Message Sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
-    });
-    
-    setName("");
-    setEmail("");
-    setMessage("");
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.functions.invoke('send-contact-email', {
+        body: { name, email, message }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Message Sent!",
+        description: "Thanks for reaching out. I'll get back to you soon.",
+      });
+
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (error: any) {
+      console.error("Error sending email:", error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send message. Please try again or contact me directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <section id="contact" className="py-24 relative">
+    <section 
+      id="contact" 
+      ref={ref as React.RefObject<HTMLElement>}
+      className={`py-24 relative transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
@@ -89,10 +117,11 @@ const Contact = () => {
             <Button 
               type="submit"
               size="lg"
-              className="w-full group bg-gradient-primary hover:shadow-neon transition-all duration-300"
+              disabled={isSubmitting}
+              className="w-full group bg-gradient-primary hover:shadow-neon transition-all duration-300 disabled:opacity-50"
             >
               <Send className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              Send Message
+              {isSubmitting ? "Sending..." : "Send Message"}
             </Button>
           </form>
 
@@ -101,48 +130,60 @@ const Contact = () => {
             <h3 className="text-xl font-bold text-center mb-6 gradient-text">
               Or reach me directly via:
             </h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-6">
               <Button 
                 variant="outline"
-                className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
+                className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon hover:scale-105 h-auto py-4 flex-col gap-2"
                 asChild
               >
                 <a href="mailto:vjagadeeshkumarreddy@gmail.com" target="_blank" rel="noopener noreferrer">
-                  <Mail className="mr-2 h-5 w-5" />
-                  📧 Email
+                  <div className="flex items-center gap-2">
+                    <Mail className="h-5 w-5" />
+                    <span className="font-semibold">Email</span>
+                  </div>
+                  <span className="text-xs text-muted-foreground">vjagadeeshkumarreddy@gmail.com</span>
                 </a>
               </Button>
               
               <Button 
                 variant="outline"
-                className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
+                className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon hover:scale-105 h-auto py-4 flex-col gap-2"
                 asChild
               >
-                <a href="https://wa.me/919391163614" target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  💬 WhatsApp
+                <a href="tel:+919391163614" target="_blank" rel="noopener noreferrer">
+                  <div className="flex items-center gap-2">
+                    <Phone className="h-5 w-5" />
+                    <span className="font-semibold">Call Me</span>
+                  </div>
+                  <span className="text-xs text-muted-foreground">+91 93911 63614</span>
                 </a>
               </Button>
               
               <Button 
                 variant="outline"
-                className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
+                className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon hover:scale-105 h-auto py-4 flex-col gap-2"
                 asChild
               >
                 <a href="https://www.linkedin.com/in/jagadeesh-kumar-reddy" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="mr-2 h-5 w-5" />
-                  💼 LinkedIn
+                  <div className="flex items-center gap-2">
+                    <Linkedin className="h-5 w-5" />
+                    <span className="font-semibold">LinkedIn</span>
+                  </div>
+                  <span className="text-xs text-muted-foreground">Connect professionally</span>
                 </a>
               </Button>
               
               <Button 
                 variant="outline"
-                className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
+                className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon hover:scale-105 h-auto py-4 flex-col gap-2"
                 asChild
               >
                 <a href="https://github.com/jagadeesh-ai-dev" target="_blank" rel="noopener noreferrer">
-                  <Github className="mr-2 h-5 w-5" />
-                  🧑‍💻 GitHub
+                  <div className="flex items-center gap-2">
+                    <Github className="h-5 w-5" />
+                    <span className="font-semibold">GitHub</span>
+                  </div>
+                  <span className="text-xs text-muted-foreground">View my code</span>
                 </a>
               </Button>
             </div>

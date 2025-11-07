@@ -1,10 +1,19 @@
-import { User, Linkedin, Github, Instagram, Briefcase, Code, Sparkles, Building2, Lightbulb, Rocket } from "lucide-react";
+import { User, Linkedin, Github, Mail, Briefcase, Code, Sparkles, Building2, Lightbulb, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const About = () => {
+  const { ref, isVisible } = useIntersectionObserver();
+
   return (
-    <section id="about" className="py-24 relative">
+    <section 
+      id="about" 
+      ref={ref as React.RefObject<HTMLElement>}
+      className={`py-24 relative transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -54,8 +63,8 @@ const About = () => {
                   className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
                   asChild
                 >
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                    <Instagram className="h-5 w-5" />
+                  <a href="mailto:vjagadeeshkumarreddy@gmail.com" target="_blank" rel="noopener noreferrer">
+                    <Mail className="h-5 w-5" />
                   </a>
                 </Button>
               </div>

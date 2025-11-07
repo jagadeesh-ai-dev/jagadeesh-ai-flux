@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const Hero = () => {
   const scrollToSection = (id: string) => {
@@ -10,6 +11,8 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <ThemeToggle />
+      
       {/* Background Image with Overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
