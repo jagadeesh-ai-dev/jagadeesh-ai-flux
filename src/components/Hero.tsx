@@ -2,8 +2,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Download } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useTheme } from "next-themes";
 
 const Hero = () => {
+  const { theme } = useTheme();
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
@@ -18,11 +20,15 @@ const Hero = () => {
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroBg})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/70 to-background"></div>
+        <div className={`absolute inset-0 bg-gradient-to-b ${
+          theme === 'light' 
+            ? 'from-background/85 via-background/95 to-background' 
+            : 'from-background/50 via-background/70 to-background'
+        }`}></div>
       </div>
 
       {/* Animated Grid Lines */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(195_100%_55%/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(195_100%_55%/0.1)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+      <div className={`absolute inset-0 bg-[linear-gradient(to_right,hsl(195_100%_55%/${theme === 'light' ? '0.2' : '0.1'})_1px,transparent_1px),linear-gradient(to_bottom,hsl(195_100%_55%/${theme === 'light' ? '0.2' : '0.1'})_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]`}></div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center animate-fade-in">

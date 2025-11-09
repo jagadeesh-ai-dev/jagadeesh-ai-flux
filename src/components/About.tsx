@@ -20,10 +20,10 @@ const About = () => {
           <div className="text-center mb-16">
             {/* Profile Picture with Gradient Border */}
             <div className="relative inline-block mb-6">
-              <div className="absolute inset-0 bg-gradient-primary rounded-full blur-md opacity-50 animate-pulse"></div>
-              <Avatar className="relative h-32 w-32 md:h-40 md:w-40 border-4 border-primary/50 shadow-neon transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(168,85,247,0.6)]">
+              <div className="absolute inset-0 bg-gradient-primary rounded-full blur-md opacity-50 animate-pulse dark:block hidden"></div>
+              <Avatar className="relative h-32 w-32 md:h-40 md:w-40 border-4 border-primary/50 shadow-lg transition-all duration-300 hover:scale-105 dark:shadow-neon light:shadow-xl">
                 <AvatarImage src="/src/assets/profile.jpg" alt="Jagadeesh Kumar Reddy" />
-                <AvatarFallback className="bg-gradient-primary text-background text-3xl md:text-4xl font-bold">
+                <AvatarFallback className="bg-gradient-primary text-primary-foreground text-3xl md:text-4xl font-bold">
                   VJKR
                 </AvatarFallback>
               </Avatar>
