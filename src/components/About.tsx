@@ -1,6 +1,7 @@
 import { User, Linkedin, Github, Mail, Briefcase, Code, Sparkles, Building2, Lightbulb, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const About = () => {
@@ -17,9 +18,17 @@ const About = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <div className="inline-flex p-3 rounded-full bg-gradient-primary mb-4 animate-glow">
-              <User className="h-8 w-8 text-background" />
+            {/* Profile Picture with Gradient Border */}
+            <div className="relative inline-block mb-6">
+              <div className="absolute inset-0 bg-gradient-primary rounded-full blur-md opacity-50 animate-pulse"></div>
+              <Avatar className="relative h-32 w-32 md:h-40 md:w-40 border-4 border-primary/50 shadow-neon transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(168,85,247,0.6)]">
+                <AvatarImage src="/src/assets/profile.jpg" alt="Jagadeesh Kumar Reddy" />
+                <AvatarFallback className="bg-gradient-primary text-background text-3xl md:text-4xl font-bold">
+                  VJKR
+                </AvatarFallback>
+              </Avatar>
             </div>
+            
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               <span className="gradient-text">About Me</span>
             </h2>
