@@ -22,9 +22,17 @@ const Resume = () => {
             <Button 
               size="lg"
               className="group bg-gradient-primary hover:shadow-neon transition-all duration-300"
+              asChild
             >
-              <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-              Download Resume
+              <a 
+                href="/Vutukuru_Jagadeesh_Kumar_Reddy_Resume.pdf" 
+                download="Vutukuru_Jagadeesh_Kumar_Reddy_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
+                Download Resume
+              </a>
             </Button>
           </div>
         </div>
