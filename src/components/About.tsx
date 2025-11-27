@@ -73,7 +73,7 @@ const About = () => {
                   className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon"
                   asChild
                 >
-                  <a href="mailto:vjagadeeshkumarreddy@gmail.com" target="_blank" rel="noopener noreferrer">
+                  <a href="mailto:vutukurujagadeeshkumarreddy@gmail.com" target="_blank" rel="noopener noreferrer">
                     <Mail className="h-5 w-5" />
                   </a>
                 </Button>

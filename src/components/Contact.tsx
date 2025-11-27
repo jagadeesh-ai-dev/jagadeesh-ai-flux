@@ -17,7 +17,7 @@ const Contact = () => {
     const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
     
-    window.location.href = `mailto:vjagadeeshkumarreddy@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:vutukurujagadeeshkumarreddy@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -109,12 +109,12 @@ const Contact = () => {
                 className="glass hover:bg-primary/20 border-primary/30 hover:border-primary transition-all duration-300 hover:shadow-neon hover:scale-105 h-auto py-4 flex-col gap-2"
                 asChild
               >
-                <a href="mailto:vjagadeeshkumarreddy@gmail.com" target="_blank" rel="noopener noreferrer">
+              <a href="mailto:vutukurujagadeeshkumarreddy@gmail.com" target="_blank" rel="noopener noreferrer">
                   <div className="flex items-center gap-2">
                     <Mail className="h-5 w-5" />
                     <span className="font-semibold">Email</span>
                   </div>
-                  <span className="text-xs text-muted-foreground">vjagadeeshkumarreddy@gmail.com</span>
+                  <span className="text-xs text-muted-foreground">vutukurujagadeeshkumarreddy@gmail.com</span>
                 </a>
               </Button>
               
