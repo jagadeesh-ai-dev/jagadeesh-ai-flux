@@ -3,47 +3,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Send, Phone, Linkedin, Github } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
   const { ref, isVisible } = useIntersectionObserver();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const { error } = await supabase.functions.invoke('send-contact-email', {
-        body: { name, email, message }
-      });
-
-      if (error) throw error;
-
-      toast({
-        title: "Message Sent!",
-        description: "Thanks for reaching out. I'll get back to you soon.",
-      });
-
-      setName("");
-      setEmail("");
-      setMessage("");
-    } catch (error: any) {
-      console.error("Error sending email:", error);
-      toast({
-        title: "Error",
-        description: error.message || "Failed to send message. Please try again or contact me directly.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    
+    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    
+    window.location.href = `mailto:vjagadeeshkumarreddy@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -117,11 +91,10 @@ const Contact = () => {
             <Button 
               type="submit"
               size="lg"
-              disabled={isSubmitting}
-              className="w-full group bg-gradient-primary hover:shadow-neon transition-all duration-300 disabled:opacity-50"
+              className="w-full group bg-gradient-primary hover:shadow-neon transition-all duration-300"
             >
               <Send className="mr-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              {isSubmitting ? "Sending..." : "Send Message"}
+              Send Message
             </Button>
           </form>
 

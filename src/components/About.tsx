@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
+import profilePhoto from "@/assets/profile-photo.jpg";
 
 const About = () => {
   const { ref, isVisible } = useIntersectionObserver();
@@ -22,7 +23,7 @@ const About = () => {
             <div className="relative inline-block mb-6">
               <div className="absolute inset-0 bg-gradient-primary rounded-full blur-md opacity-50 animate-pulse dark:block hidden"></div>
               <Avatar className="relative h-32 w-32 md:h-40 md:w-40 border-4 border-primary/50 shadow-lg transition-all duration-300 hover:scale-105 dark:shadow-neon light:shadow-xl">
-                <AvatarImage src="/src/assets/profile.jpg" alt="Jagadeesh Kumar Reddy" />
+                <AvatarImage src={profilePhoto} alt="Jagadeesh Kumar Reddy" />
                 <AvatarFallback className="bg-gradient-primary text-primary-foreground text-3xl md:text-4xl font-bold">
                   VJKR
                 </AvatarFallback>
